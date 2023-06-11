@@ -13,7 +13,8 @@
  # Execute SQL file
  mysql < db1.sql
  
+ kill $(cat /var/run/mysqld/mysqld.pid)
  # Stop mysqld service
-    service mysql stop
+  #  service mysql stop
 
- mysqld
+ mysqld --bind-address=0.0.0.0

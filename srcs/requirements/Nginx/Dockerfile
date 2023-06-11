@@ -13,7 +13,7 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -subj "/CN=abouhaga.42.fr"
 
 #copy new  nginx config file
-COPY ./srcs/requirements/Nginx/conf/nginx.conf /etc/nginx/sites-available/default
+COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
 #execute nginx
 CMD ["nginx", "-g", "daemon off;"]

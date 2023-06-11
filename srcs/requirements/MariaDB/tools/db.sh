@@ -14,5 +14,6 @@
  mysql < db1.sql
  
  # Stop mysqld service
- kill $(cat /var/run/mysqld/mysqld.pid)
+    service mysql stop
+
  mysqld

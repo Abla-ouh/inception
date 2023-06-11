@@ -41,16 +41,14 @@ networks:
   inception:
 volumes:
   wp:
-    driver: local
-    driver_opts:
-      type: bind
-      o: bind
-      device: /home/abouhaga/data/wordpress
+    # driver: local
+    # driver_opts:
+    #   type: bind
+    #   o: bind
+    #   device: /home/abouhaga/data/wordpress
   db:
-    driver: local
-    driver_opts:
-      type: bind
-      o: bind
-      device: /home/abouhaga/data/mariadb
-
-    
+    # driver: local
+    # driver_opts:
+    #   type: bind
+    #   o: bind
+    #   device: /home/abouhaga/data/mariadb

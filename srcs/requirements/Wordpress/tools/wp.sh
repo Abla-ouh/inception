@@ -1,6 +1,6 @@
 
 #!/bin/bash
-
+#set-up WordPress using wp-cli, and configuring PHP-FPM. 
 # create necessary directories
 mkdir -p /var/www/html/wordpress
 chown -R www-data:www-data /var/www/html/wordpress
@@ -40,7 +40,7 @@ wp core download --allow-root
 # --user_pass=abouhaga \
 # --allow-root
 
-# update PHP-FPM configuration
+# update PHP-FPM configuration : updates the PHP-FPM configuration file to listen on port 9000 instead of using a Unix socket. 
 sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 9000/g' /etc/php/7.3/fpm/pool.d/www.conf
 
 # start PHP-FPM service

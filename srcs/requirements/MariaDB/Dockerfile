@@ -6,5 +6,4 @@ RUN apt-get update \
 # COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d
 COPY ./tools/db.sh /
 RUN chmod +x /db.sh
-# WHILE true; do sleep 1; done
 CMD ["/db.sh"]

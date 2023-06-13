@@ -12,9 +12,7 @@
  
  # Execute SQL file
  mysql < db1.sql
- 
+#  sends a signal to the MariaDB process to stop it 
  kill $(cat /var/run/mysqld/mysqld.pid)
- # Stop mysqld service
-  #  service mysql stop
 
  mysqld --bind-address=0.0.0.0

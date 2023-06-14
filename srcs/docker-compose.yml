@@ -13,6 +13,7 @@ services:
         - inception
       depends_on:
         - wordpress
+
     wordpress:
       build: ./requirements/Wordpress
       container_name: wordpress
@@ -26,6 +27,7 @@ services:
         - .env
       depends_on:
         - mariadb
+        
     mariadb:
       build: ./requirements/MariaDB
       container_name: mariadb

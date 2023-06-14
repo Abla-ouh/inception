@@ -19,11 +19,13 @@ wp core download --allow-root
 
 # rename config file and replace with custom one
 # mv wp-config-sample.php wp-config.php
-# sed -i -r "s/db1/$DB_NAME/1" wp-config.php
-# sed -i -r "s/user/$DB_USER/1" wp-config.php
-# sed -i -r "s/pwd/$DB_PASS/1" wp-config.php
-
-# # install WordPress
+# sed -i -r "s/db1/DB_NAME/1" wp-config.php
+# sed -i -r "s/user/DB_USER/1" wp-config.php
+# sed -i -r "s/pwd/DB_PASSWORD/1" wp-config.php
+sudo wp  core install --allow-root --url=${WP_URL} --title=${WP_TITLE} \
+                        --admin_user=${WP_ADMIN_USER} --admin_password=${WP_ADMIN_PASS} \
+                        --admin_email=${WP_ADMIN_EMAIL}
+# install WordPress
 # wp core install \
 # --url=$DOMAIN_NAME \
 # --title=simple_title \
@@ -33,12 +35,12 @@ wp core download --allow-root
 # --skip-email \
 # --allow-root
 
-# # create a new user
-# wp user create \
-# user Ouhagaabla@gmail.com \
-# --role=author \
-# --user_pass=abouhaga \
-# --allow-root
+# create a new user
+wp user create \
+user Ouhagaabla@gmail.com \
+--role=author \
+--user_pass=abouhaga \
+--allow-root
 
 # update PHP-FPM configuration : updates the PHP-FPM configuration file to listen on port 9000 instead of using a Unix socket. 
 sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 9000/g' /etc/php/7.3/fpm/pool.d/www.conf

@@ -39,6 +39,7 @@ services:
         - inception
       env_file:
         - .env
+
 networks:
   inception:
 volumes:

@@ -1,46 +1,45 @@
-
 #!/bin/bash
-#set-up WordPress using wp-cli, and configuring PHP-FPM. 
+
 # create necessary directories
 mkdir -p /var/www/html/wordpress
 chown -R www-data:www-data /var/www/html/wordpress
-# change to directory for WordPress installation
 cd /var/www/html/wordpress 
 
-# download wp-cli tool
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-
 # make it executable and copy to bin
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
-
-# download WordPress core
 wp core download --allow-root
+# change to directory for WordPress installation
 
-# rename config file and replace with custom one
-# mv wp-config-sample.php wp-config.php
-# sed -i -r "s/db1/DB_NAME/1" wp-config.php
-# sed -i -r "s/user/DB_USER/1" wp-config.php
-# sed -i -r "s/pwd/DB_PASSWORD/1" wp-config.php
-sudo wp  core install --allow-root --url=${WP_URL} --title=${WP_TITLE} \
-                        --admin_user=${WP_ADMIN_USER} --admin_password=${WP_ADMIN_PASS} \
-                        --admin_email=${WP_ADMIN_EMAIL}
-# install WordPress
-# wp core install \
-# --url=$DOMAIN_NAME \
-# --title=simple_title \
-# --admin_user=Abla \
-# --admin_password=abla1234 \
-# --admin_email=Ouhagaabla@gmail.com \
-# --skip-email \
-# --allow-root
+# Generate wp-config.php file
+wp config create --dbname=$DB_NAME \
+                --dbuser=$DB_USER \
+                --dbpass=$DB_PASS \
+                --dbhost=$DB_HOST \
+                --path=/var/www/html/wordpress  --allow-root
+                       
+# Install WordPress
+wp core install \
+    --url=$DOMAIN_NAME \
+    --title=$SITE_TITLE \
+    --admin_user=$ADMIN_USER \
+    --admin_password=$ADMIN_PASS \
+    --admin_email=$ADMIN_EMAIL \
+    --path=/var/www/html/wordpress \
+    --allow-root
 
 # create a new user
 wp user create \
-user Ouhagaabla@gmail.com \
---role=author \
---user_pass=abouhaga \
---allow-root
+    $USER $EMAIL \
+    --role=author \
+    --user_pass=$PASS \
+    --allow-root
+
+# define('FORCE_SSL_LOGIN', true);
+# define('FORCE_SSL_ADMIN', true);
+# define( 'CONCATENATE_SCRIPTS', false );
+# define( 'SCRIPT_DEBUG', true );
 
 # update PHP-FPM configuration : updates the PHP-FPM configuration file to listen on port 9000 instead of using a Unix socket. 
 sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 9000/g' /etc/php/7.3/fpm/pool.d/www.conf
